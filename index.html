@@ -2,20 +2,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CleanTrack</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CleanTrack</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(180deg, #e0f7fa 0%, #ffffff 100%);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+      background-color: #ffffffcc;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .logo {
+      width: 120px;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #0077cc;
+    }
+
+    p {
+      margin: 0.5rem 0;
+    }
+
+    h2 {
+      margin-top: 2rem;
+      font-size: 1.25rem;
+      color: #0077cc;
+    }
+
+    form {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    input[type="email"] {
+      padding: 0.75rem;
+      width: 100%;
+      max-width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    button {
+      padding: 0.75rem 1.5rem;
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+    select {
+      margin: 1rem 0;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.875rem;
+      color: #888;
+    }
+
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(0, 119, 204, 0.1);
+      z-index: -1;
+      animation: float 20s ease-in-out infinite;
+    }
+
+    .bubble.one {
+      width: 100px;
+      height: 100px;
+      top: 10%;
+      left: 5%;
+    }
+
+    .bubble.two {
+      width: 150px;
+      height: 150px;
+      top: 70%;
+      right: 10%;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
+  <div class="bubble one"></div>
+  <div class="bubble two"></div>
+  <div class="container">
+    <img src="logo.png" alt="CleanTrack Logo" class="logo" />
     <h1>CleanTrack</h1>
-    <p><strong>EN:</strong> A simple tool for small cleaning businesses to track hours and tasks. No login, no extra fuss. Just a clean way to stay organized.</p>
-    <p><strong>FI:</strong> Yksinkertainen työkalu pienille siivousyrityksille tuntien ja tehtävien seuraamiseen. Ei kirjautumista, ei ylimääräistä säätöä. Vain selkeä tapa pysyä järjestyksessä.</p>
-    <p><strong>SV:</strong> Ett enkelt verktyg för små städföretag att följa upp timmar och uppgifter. Inget inlogg, inget extra krångel. Bara ett rent sätt att hålla ordning.</p>
+
+    <label for="language-select"><strong>Select Language:</strong></label>
+    <select id="language-select" onchange="changeLanguage()">
+      <option value="en">English</option>
+      <option value="fi">Suomi</option>
+      <option value="sv">Svenska</option>
+    </select>
+
+    <div class="lang en">
+      <p>A simple tool for small cleaning businesses to track hours and tasks. No login, no extra fuss. Just a clean way to stay organized.</p>
+    </div>
+
+    <div class="lang fi" style="display: none;">
+      <p>Yksinkertainen työkalu pienille siivousyrityksille tuntien ja tehtävien seuraamiseen. Ei kirjautumista, ei ylimääräistä säätöä. Vain selkeä tapa pysyä järjestyksessä.</p>
+    </div>
+
+    <div class="lang sv" style="display: none;">
+      <p>Ett enkelt verktyg för små städföretag att följa upp timmar och uppgifter. Inget inlogg, inget extra krångel. Bara ett rent sätt att hålla ordning.</p>
+    </div>
 
     <h2>Leave your email to get early access:</h2>
     <form action="https://formspree.io/f/mayvlpob" method="POST">
-        <input type="email" name="email" placeholder="Your email" required>
-        <button type="submit">Notify Me</button>
+      <input type="email" name="email" placeholder="Your email" required />
+      <button type="submit">Notify Me</button>
     </form>
+  </div>
+  <footer>&copy; 2025 CleanTrack</footer>
+
+  <script>
+    function changeLanguage() {
+      const lang = document.getElementById('language-select').value;
+      document.querySelectorAll('.lang').forEach(el => el.style.display = 'none');
+      document.querySelector(`.lang.${lang}`).style.display = 'block';
+    }
+  </script>
 </body>
 </html>
